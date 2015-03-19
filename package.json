@@ -1,0 +1,15 @@
+{
+  "name": "metalsmith-typescript",
+  "version": "1.0.0",
+  "description": "a TypeScript plugin for metalsmith",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "metalsmith",
+    "TypeScript"
+  ],
+  "author": "Shinsuke-Abe",
+  "license": "MIT"
+}
