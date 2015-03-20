@@ -4,10 +4,7 @@
   "description": "a TypeScript plugin for metalsmith",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha --recursive ./test/specs",
-    "tsc_lib": "tsc --outDir ./lib src/lib/*.ts",
-    "tsc_spec": "tsc --outDir ./test/specs src/test/specs/*.ts",
-    "dev": "npm run tsc_lib && npm run tsc_spec && npm run test"
+    "test": "mocha --recursive ./test/specs"
   },
   "keywords": [
     "metalsmith",
