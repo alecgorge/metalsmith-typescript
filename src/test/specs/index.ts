@@ -4,7 +4,7 @@
 /// <reference path="../../lib/index.ts" />
 
 import path = require('path');
-var rsolve = path.resolve
+var rsolve = path.resolve;
 
 import typescript = require('../../lib/index');
 
@@ -24,10 +24,10 @@ describe('plugin module unit test:', () => {
       var builder = new Metalsmith(routeDir);
 
       it('compile tsc files out to build directory', (done) => {
-        builder.use(typescript()).build();
-
-        assertDirEqual(routeDir + "/build", routeDir + "/expected");
-        done();
+        var result = builder.use(typescript()).build((err) => {
+          assertDirEqual(routeDir + "/build", routeDir + "/expected");
+          done();
+        });
       });
   });
 
