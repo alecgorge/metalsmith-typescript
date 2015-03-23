@@ -1,4 +1,5 @@
 node_modules/
-typings/
+./typings/
 tsd.json
 **/tsconfig.json
+npm-debug.log
