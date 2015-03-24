@@ -5,11 +5,8 @@ function metalsmithTypescript(option?: Option) {
     console.log(files);
     // matching file patterns
     try {
-      var regex = new RegExp(".*\.ts$");
-      var filepattern:(value: string, idx: number, arr: string[]) => boolean = (value, idx, arr) => {
-        return regex.test(value);
-      };
-      var paths = Object.keys(files).filter(filepattern).map((value, idx, arr) => {return metalsmith.source() + "/" + value});
+      var plugin = new TypeScriptPlugin(metalsmith, option);
+      var paths = Object.keys(files).filter(plugin.filePattern).map(plugin.fileFullPath);
 
       console.log(paths);
     } catch(err) {
@@ -26,6 +23,23 @@ function metalsmithTypescript(option?: Option) {
     delete files["greeter.ts"];
     return done();
   }
+}
+
+class TypeScriptPlugin {
+  private regex = new RegExp(".*\.ts$");
+  private metalsmith: any;
+
+  constructor(appSettings: any, option: Option) {
+    this.metalsmith = appSettings;
+  }
+
+  filePattern:(value: string, idx: number, arr: string[]) => boolean = (value, idx, arr) => {
+    return this.regex.test(value);
+  };
+
+  fileFullPath:(value: string, idx: number, arr: string[]) => string = (value, idx, arr) => {
+    return this.metalsmith.source() + "/" + value;
+  };
 }
 
 interface Option {
