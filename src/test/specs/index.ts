@@ -3,9 +3,6 @@
 /// <reference path="../typings/assert-dir-equal/assert-dir-equal.d.ts" />
 /// <reference path="../../lib/index.ts" />
 
-import path = require('path');
-// var rsolve = path.resolve;
-
 import typescript = require('../../lib/index');
 
 import chai = require('chai');
