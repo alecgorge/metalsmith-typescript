@@ -10,7 +10,7 @@ import typescript = require('../../lib/index');
 
 import chai = require('chai');
 
-// var expect = chai.expect;
+var expect = chai.expect;
 
 import Metalsmith = require('metalsmith');
 
@@ -18,17 +18,35 @@ import assertDirEqual = require('assert-dir-equal');
 
 /** Unit tests */
 describe('plugin module unit test:', () => {
-  // default options
   describe('without option', () => {
+    it('compile tsc files out to build directory', done => {
       var routeDir = "./test/fixtures/withoutoptions";
-      var builder = new Metalsmith(routeDir);
 
-      it('compile tsc files out to build directory', (done) => {
-        builder.use(typescript()).build((err) => {
-          assertDirEqual(routeDir + "/build", routeDir + "/expected");
-          done();
-        });
+      new Metalsmith(routeDir).use(typescript()).build( err => {
+        assertDirEqual(routeDir + "/build", routeDir + "/expected");
+        done();
       });
+    });
+
+    it('compile nested tsc files out to build directory', done => {
+      var routeDir = "./test/fixtures/nestedscripts";
+
+      new Metalsmith(routeDir).use(typescript()).build( err => {
+        assertDirEqual(routeDir + "/build", routeDir + "/expected");
+        done();
+      });
+    });
+  });
+
+  describe('compile error handling', () => {
+    var routeDir = "./test/fixtures/withcompileerror";
+
+    it('callback with compile error', done => {
+      new Metalsmith(routeDir).use(typescript()).build( err => {
+        expect(err).not.to.null;
+        done();
+      })
+    });
   });
 
   // with source directory option
