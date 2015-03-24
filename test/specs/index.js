@@ -63,5 +63,14 @@ describe('plugin module unit test:', function () {
                 done();
             });
         });
+        it('module compile by option', function (done) {
+            var routeDir = "./test/fixtures/withmodulecodeoption";
+            new Metalsmith(routeDir).use(typescript({
+                moduleType: "commonjs"
+            })).build(function (err) {
+                assertDirEqual(routeDir + "/build", routeDir + "/expected");
+                done();
+            });
+        });
     });
 });

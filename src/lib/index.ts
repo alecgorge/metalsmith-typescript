@@ -32,6 +32,7 @@ class TypeScriptPlugin {
 
   private metalsmith: any;
   private regex: any;
+  private moduleType: string;
 
   constructor(appSettings: any, option?: Option) {
     this.metalsmith = appSettings;
@@ -40,7 +41,11 @@ class TypeScriptPlugin {
         this.metalsmith.directory() + "/" + option.outDir : this.metalsmith.destination();
 
     this.regex = option && option.filter ?
-        new RegExp(option.filter + this.basefilenameReg) : new RegExp(this.basefilenameReg)
+        new RegExp(option.filter + this.basefilenameReg) : new RegExp(this.basefilenameReg);
+
+    if(option && option.moduleType) {
+      this.moduleType = option.moduleType;
+    }
   }
 
   filePattern:(value: string, idx: number, arr: string[]) => boolean = (value, idx, arr) => {
@@ -54,6 +59,10 @@ class TypeScriptPlugin {
   compileOptions() {
     this.compOptions.push("--outDir", this.destDir);
 
+    if(this.moduleType) {
+      this.compOptions.push("--module", this.moduleType);
+    }
+
     return this.compOptions
   }
 }
@@ -61,6 +70,7 @@ class TypeScriptPlugin {
 interface Option {
   outDir?: string;
   filter?: string;
+  moduleType?: string;
 }
 
 export = metalsmithTypescript

@@ -77,10 +77,15 @@ describe('plugin module unit test:', () => {
         done();
       });
     });
+
+    it('module compile by option', done => {
+      var routeDir = "./test/fixtures/withmodulecodeoption";
+
+      new Metalsmith(routeDir).use(typescript({moduleType: "commonjs"})).build( err => {
+        assertDirEqual(routeDir + "/build", routeDir + "/expected");
+        done();
+      });
+    });
   });
-
-  // modulable option
-
-  // pending: rename source directory with typescript
 
 });
