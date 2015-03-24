@@ -49,15 +49,14 @@ describe('plugin module unit test:', () => {
     });
   });
 
-  // with source directory option
-
-  // with file pattern option
-
   // with output directory option
+
+  // filename filter(not extension)
 
   // with multipule options
 
-  // rename source directory with typescript
+  // modulable option
 
+  // pending: rename source directory with typescript
 
 });
