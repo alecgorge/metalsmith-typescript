@@ -34,4 +34,16 @@ describe('plugin module unit test:', function () {
             });
         });
     });
+    describe('with options', function () {
+        it('output file to target dir by option', function (done) {
+            var routeDir = "./test/fixtures/withoutdiroption";
+            new Metalsmith(routeDir).use(typescript({
+                outDir: "target"
+            })).build(function (err) {
+                assertDirEqual(routeDir + "/target", routeDir + "/expected");
+                assertDirEqual(routeDir + "/build", routeDir + "/expectedbuild");
+                done();
+            });
+        });
+    });
 });

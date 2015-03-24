@@ -9,8 +9,7 @@ function metalsmithTypescript(option?: Option) {
 
       var result = tsc.compile(
         targetFiles.map(plugin.fileFullPath),
-        ["--outDir", metalsmith.destination(),
-         "--noEmitOnError"]);
+        plugin.compileOptions());
 
       if(!result || result.errors.length > 0) {
         return done(result.errors);
@@ -28,10 +27,17 @@ function metalsmithTypescript(option?: Option) {
 
 class TypeScriptPlugin {
   private regex = new RegExp(".*\.ts$");
+  private compOptions: string[] = ["--noEmitOnError"];
+  private destDir: string;
+
   private metalsmith: any;
 
   constructor(appSettings: any, option?: Option) {
     this.metalsmith = appSettings;
+
+    this.destDir =
+      option && option.outDir ?
+        this.metalsmith.directory() + "/" + option.outDir : this.metalsmith.destination();
   }
 
   filePattern:(value: string, idx: number, arr: string[]) => boolean = (value, idx, arr) => {
@@ -41,6 +47,12 @@ class TypeScriptPlugin {
   fileFullPath:(value: string, idx: number, arr: string[]) => string = (value, idx, arr) => {
     return this.metalsmith.source() + "/" + value;
   };
+
+  compileOptions() {
+    this.compOptions.push("--outDir", this.destDir);
+
+    return this.compOptions
+  }
 }
 
 interface Option {

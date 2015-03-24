@@ -50,7 +50,17 @@ describe('plugin module unit test:', () => {
     });
   });
 
-  // with output directory option
+  describe('with options', () => {
+    it('output file to target dir by option', done => {
+      var routeDir = "./test/fixtures/withoutdiroption";
+
+      new Metalsmith(routeDir).use(typescript({outDir: "target"})).build( err => {
+        assertDirEqual(routeDir + "/target", routeDir + "/expected");
+        assertDirEqual(routeDir + "/build", routeDir + "/expectedbuild");
+        done();
+      });
+    });
+  });
 
   // filename filter(not extension)
 
