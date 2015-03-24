@@ -23,7 +23,6 @@ describe('plugin module unit test:', () => {
       var routeDir = "./test/fixtures/withoutoptions";
 
       new Metalsmith(routeDir).use(typescript()).build( err => {
-        console.log(err);
         assertDirEqual(routeDir + "/build", routeDir + "/expected");
         done();
       });
@@ -60,11 +59,25 @@ describe('plugin module unit test:', () => {
         done();
       });
     });
+
+    it('filtering files include word by option', done => {
+      var routeDir = "./test/fixtures/withfilteroption";
+
+      new Metalsmith(routeDir).use(typescript({filter: "target"})).build( err => {
+        assertDirEqual(routeDir + "/build", routeDir + "/expected");
+        done();
+      });
+    });
+
+    it('filtering files starts with word by option', done => {
+      var routeDir = "./test/fixtures/withfilteroption";
+
+      new Metalsmith(routeDir).use(typescript({outDir: "buildstartswith", filter: "^target"})).build( err => {
+        assertDirEqual(routeDir + "/buildstartswith", routeDir + "/expectedstartswith");
+        done();
+      });
+    });
   });
-
-  // filename filter(not extension)
-
-  // with multipule options
 
   // modulable option
 

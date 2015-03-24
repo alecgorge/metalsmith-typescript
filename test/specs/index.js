@@ -12,7 +12,6 @@ describe('plugin module unit test:', function () {
         it('compile tsc files out to build directory', function (done) {
             var routeDir = "./test/fixtures/withoutoptions";
             new Metalsmith(routeDir).use(typescript()).build(function (err) {
-                console.log(err);
                 assertDirEqual(routeDir + "/build", routeDir + "/expected");
                 done();
             });
@@ -42,6 +41,25 @@ describe('plugin module unit test:', function () {
             })).build(function (err) {
                 assertDirEqual(routeDir + "/target", routeDir + "/expected");
                 assertDirEqual(routeDir + "/build", routeDir + "/expectedbuild");
+                done();
+            });
+        });
+        it('filtering files include word by option', function (done) {
+            var routeDir = "./test/fixtures/withfilteroption";
+            new Metalsmith(routeDir).use(typescript({
+                filter: "target"
+            })).build(function (err) {
+                assertDirEqual(routeDir + "/build", routeDir + "/expected");
+                done();
+            });
+        });
+        it('filtering files starts with word by option', function (done) {
+            var routeDir = "./test/fixtures/withfilteroption";
+            new Metalsmith(routeDir).use(typescript({
+                outDir: "buildstartswith",
+                filter: "^target"
+            })).build(function (err) {
+                assertDirEqual(routeDir + "/buildstartswith", routeDir + "/expectedstartswith");
                 done();
             });
         });

@@ -26,11 +26,12 @@ function metalsmithTypescript(option?: Option) {
 }
 
 class TypeScriptPlugin {
-  private regex = new RegExp(".*\.ts$");
+  private basefilenameReg = ".*\.ts$";
   private compOptions: string[] = ["--noEmitOnError"];
   private destDir: string;
 
   private metalsmith: any;
+  private regex: any;
 
   constructor(appSettings: any, option?: Option) {
     this.metalsmith = appSettings;
@@ -38,6 +39,10 @@ class TypeScriptPlugin {
     this.destDir =
       option && option.outDir ?
         this.metalsmith.directory() + "/" + option.outDir : this.metalsmith.destination();
+
+    this.regex =
+      option && option.filter ?
+        new RegExp(option.filter + this.basefilenameReg) : new RegExp(this.basefilenameReg)
   }
 
   filePattern:(value: string, idx: number, arr: string[]) => boolean = (value, idx, arr) => {
@@ -56,7 +61,8 @@ class TypeScriptPlugin {
 }
 
 interface Option {
-  outDir?: String;
+  outDir?: string;
+  filter?: string;
 }
 
 export = metalsmithTypescript
