@@ -47,6 +47,8 @@ describe('plugin module unit test:', () => {
         done();
       })
     });
+
+    // TODO check compile error file...
   });
 
   // with source directory option

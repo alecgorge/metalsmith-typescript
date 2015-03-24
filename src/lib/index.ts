@@ -6,22 +6,24 @@ function metalsmithTypescript(option?: Option) {
     // matching file patterns
     try {
       var plugin = new TypeScriptPlugin(metalsmith, option);
-      var paths = Object.keys(files).filter(plugin.filePattern).map(plugin.fileFullPath);
 
-      console.log(paths);
+      var targetFiles = Object.keys(files).filter(plugin.filePattern);
+
+      console.log(targetFiles);
+
+      var result = tsc.compile(targetFiles.map(plugin.fileFullPath), ["--outDir", metalsmith.destination()]);
+
+      if(result.errors) {
+        return done(result.errors);
+      }
+
+      // remove ts files
+      targetFiles.forEach((value, idx, arr) => delete files[value]);
+
+      return done();
     } catch(err) {
       return (done(err));
     }
-
-    var result = tsc.compile(paths, ["--outDir", metalsmith.destination()]);
-
-    if(result.errors) {
-      return done(result.errors);
-    }
-
-    // remove ts files
-    delete files["greeter.ts"];
-    return done();
   }
 }
 
