@@ -10,7 +10,7 @@
     "metalsmith",
     "TypeScript"
   ],
-  "author": "Shinsuke-Abe",
+  "author": "Shinsuke-Abe <mao.instantlife@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "typescript-compiler": "^1.4.1-2"
