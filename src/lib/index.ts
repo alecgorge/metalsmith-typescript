@@ -3,9 +3,12 @@ var tsc = require('typescript-compiler');
 function metalsmithTypescript(option?: Option) {
   return function(files, metalsmith, done) {
     var result = tsc.compile(
-      metalsmith.source() + "/**/*.ts",
+      [metalsmith.source() + "/greeter.ts"],
       ["--outDir", metalsmith.destination()]);
     console.log(result);
+
+    // remove ts files
+    delete files["greeter.ts"];
     return done();
   }
 }
