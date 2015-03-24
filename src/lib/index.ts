@@ -36,12 +36,10 @@ class TypeScriptPlugin {
   constructor(appSettings: any, option?: Option) {
     this.metalsmith = appSettings;
 
-    this.destDir =
-      option && option.outDir ?
+    this.destDir = option && option.outDir ?
         this.metalsmith.directory() + "/" + option.outDir : this.metalsmith.destination();
 
-    this.regex =
-      option && option.filter ?
+    this.regex = option && option.filter ?
         new RegExp(option.filter + this.basefilenameReg) : new RegExp(this.basefilenameReg)
   }
 
