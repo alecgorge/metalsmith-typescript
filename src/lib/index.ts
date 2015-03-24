@@ -2,8 +2,6 @@ var tsc = require('typescript-compiler');
 
 function metalsmithTypescript(option?: Option) {
   return function(files, metalsmith, done) {
-    console.log(files);
-    // matching file patterns
     try {
       var plugin = new TypeScriptPlugin(metalsmith, option);
 
@@ -31,7 +29,7 @@ class TypeScriptPlugin {
   private regex = new RegExp(".*\.ts$");
   private metalsmith: any;
 
-  constructor(appSettings: any, option: Option) {
+  constructor(appSettings: any, option?: Option) {
     this.metalsmith = appSettings;
   }
 
