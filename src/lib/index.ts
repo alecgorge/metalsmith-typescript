@@ -45,8 +45,6 @@ class TypeScriptPlugin {
 }
 
 interface Option {
-  srcDir?: String;
-  filenameFilter?: String;
   outDir?: String;
 }
 
