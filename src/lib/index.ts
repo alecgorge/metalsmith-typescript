@@ -9,7 +9,10 @@ function metalsmithTypescript(option?: Option) {
 
       console.log(targetFiles);
 
-      var result = tsc.compile(targetFiles.map(plugin.fileFullPath), ["--outDir", metalsmith.destination()]);
+      var result = tsc.compile(
+        targetFiles.map(plugin.fileFullPath),
+        ["--outDir", metalsmith.destination(),
+         "--noEmitOnError"]);
 
       if(result.errors) {
         return done(result.errors);
