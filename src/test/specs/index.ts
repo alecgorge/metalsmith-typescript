@@ -23,6 +23,7 @@ describe('plugin module unit test:', () => {
       var routeDir = "./test/fixtures/withoutoptions";
 
       new Metalsmith(routeDir).use(typescript()).build( err => {
+        console.log(err);
         assertDirEqual(routeDir + "/build", routeDir + "/expected");
         done();
       });

@@ -7,14 +7,12 @@ function metalsmithTypescript(option?: Option) {
 
       var targetFiles = Object.keys(files).filter(plugin.filePattern);
 
-      console.log(targetFiles);
-
       var result = tsc.compile(
         targetFiles.map(plugin.fileFullPath),
         ["--outDir", metalsmith.destination(),
          "--noEmitOnError"]);
 
-      if(result.errors) {
+      if(!result || result.errors.length > 0) {
         return done(result.errors);
       }
 

@@ -12,6 +12,7 @@ describe('plugin module unit test:', function () {
         it('compile tsc files out to build directory', function (done) {
             var routeDir = "./test/fixtures/withoutoptions";
             new Metalsmith(routeDir).use(typescript()).build(function (err) {
+                console.log(err);
                 assertDirEqual(routeDir + "/build", routeDir + "/expected");
                 done();
             });
