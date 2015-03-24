@@ -12,6 +12,10 @@
   ],
   "author": "Shinsuke-Abe <mao.instantlife@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Shinsuke-Abe/metalsmith-typescript"
+  },
   "dependencies": {
     "typescript-compiler": "^1.4.1-2"
   },
