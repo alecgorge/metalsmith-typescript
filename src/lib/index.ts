@@ -46,6 +46,10 @@ class TypeScriptPlugin {
     if(option && option.moduleType) {
       this.moduleType = option.moduleType;
     }
+
+    if(option && option.compilerOptions) {
+      this.compOptions = this.compOptions.concat(option.compilerOptions);
+    }
   }
 
   filePattern:(value: string, idx: number, arr: string[]) => boolean = (value, idx, arr) => {
@@ -71,6 +75,7 @@ interface Option {
   outDir?: string;
   filter?: string;
   moduleType?: string;
+  compilerOptions?: string[];
 }
 
 export = metalsmithTypescript
